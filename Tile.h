@@ -7,10 +7,9 @@ private:
 	bool isWall;
 	int x;
 	int y;
-	Board* parentBoard;
 public:
 	//CONSTRUCTOR
-	Tile(int p_x, int p_y, Board* newBoard);
+	Tile(int p_x, int p_y);
 
 	//GETTERS
 	bool getWall(); //Returns true if the tile is currently a wall, returns false otherwise.
