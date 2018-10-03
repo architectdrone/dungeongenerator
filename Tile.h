@@ -1,3 +1,11 @@
+/**
+* @author Owen Mellema 
+* @file Tile.h
+* @date 10-02-18
+* @brief A single tile. A "tile" could be anything, but I think of them as being game objects. Generally, they are boolean values (either "wall" or not "wall" in 2D space.) 
+**/
+
+
 #ifndef TILE_H
 #define TILE_H
 
