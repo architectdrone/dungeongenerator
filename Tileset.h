@@ -13,7 +13,7 @@
 class Tileset
 {
 private:
-	list<tile*>* allTiles;
+	list<Tile*>* allTiles;
 
 public:
 	//CONSTRUCTOR
