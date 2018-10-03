@@ -39,3 +39,4 @@ Another thing to consider is how the dungeon is using space. If we have a limite
 ## Goals
 + Make classes that can be used in other programs regarding dungeon and board creation.
 + Create a prototype optimized dungeon generation alogorithm, and export valid dungeons to the user in ways that they can visualize and use.
++ Learn how to use GitHub
