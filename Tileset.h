@@ -17,12 +17,12 @@ private:
 public:
 	//CONSTRUCTOR
 	Tileset();
+	//Copy constructor here
 
 	//DESTRUCTOR
 	~Tileset();
 
 	//GETTERS
-	LinkedList<Tile*>* getAllTiles();//Returns a pointer to the list of all tiles. Does NOT make a copy, so be careful.
 	Tileset* getAllWalls(); //Returns a tileset containing all walls within the original tileset.
 	Tileset* getAllNonWalls(); //Returns a tileset containing all non-walls within the original tileset.
 	Tileset* getAllX(int x); //Returns a tileset containing all tiles with the given x-coordinate within the original tileset.
