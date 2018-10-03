@@ -4,11 +4,17 @@ Just a dungeon generator I cooked up. :) I also started "really" learning git th
 
 ## Definitions
 In order to properly explain what I intend for this program to do, we need to first start with some definitions.
+
 **Wall**: Some obstacle that a player character cannot cross.
+
 **Tile**: A tile is a location on a 2D plane that is either a wall, or not a wall. Its location is specified with X and Y coordinates.
+
 **Tileset**: A set of tiles. Each tile may only be included in a tileset once. It may be of arbitrary size.
+
 **Board**:A tileset that contains all tiles within a certain X and Y range.
+
 **Dungeon**: A board in which every non-wall tile is accesible by every other non-wall tile. 
+
 
 ## Dungeon Generation
 The simplest dungeon is simply a board of non-walls. (A wall will be represented with a "#", and a non-wall with a " ".)
