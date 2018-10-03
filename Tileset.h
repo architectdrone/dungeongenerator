@@ -8,11 +8,12 @@
 #ifndef TILESET_H
 #define TILESET_H
 #include "Tile.h"
+#include <list>
 #include <iostream>
 class Tileset
 {
 private:
-	LinkedList<Tile*>* allTiles;
+	list<tile*>* allTiles;
 
 public:
 	//CONSTRUCTOR
