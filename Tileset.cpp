@@ -265,7 +265,7 @@ void Tileset::remove(Tileset* toRemove)
 	{
 		if (toRemove->isInTileset(*it))
 		{
-			allTiles->erase(it);
+			it = allTiles->erase(it);
 		}
 	}
 }
