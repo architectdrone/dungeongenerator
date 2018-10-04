@@ -1,7 +1,9 @@
 #include "Tileset.h"
 #include "Tile.h"
+using namespace std;
 
 Tileset::Tileset()
 {
-	allTiles = new List<Tile>;
+	allTiles = new list<Tile*>;
 }
+
