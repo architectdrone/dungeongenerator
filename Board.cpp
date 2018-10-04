@@ -1,12 +1,15 @@
 #include "Tileset.h"
 #include "Tile.h"
 #include "Board.h"
+#include <iostream>
+using namespace std;
 
 Board::Board(int x, int y) 
 {
+	outerWalls = new Tileset;
+	boardTileset = new Tileset;
 	x_size = x;
 	y_size = y;
-	Tileset* toReturn = new Tileset;
 	for (int y = 0; y < y_size; y++)
 	{
 		for (int x = 0; x < x_size; x++)
@@ -19,6 +22,8 @@ Board::Board(int x, int y)
 
 Board::Board(int size) 
 {
+	outerWalls = new Tileset;
+	boardTileset = new Tileset;
 	x_size = size;
 	y_size = size;
 	for (int y = 0; y < y_size; y++)
