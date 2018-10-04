@@ -39,3 +39,8 @@ Tileset* Tileset::getAllWalls()
 
 	}
 }
+
+void Tileset::add(Tile & newTile)
+{
+	allTiles -> insert(newTile, 0 );
+}
