@@ -2,7 +2,6 @@
 #include "Tile.h"
 #include "Tileset.h"
 #include "Board.h"
-#include "generalTools.cpp"
 using namespace std;
 
 void printBoard(Board* myBoard)
@@ -27,6 +26,7 @@ void printBoard(Board* myBoard)
 			}
 		}
 		printf("%s\n", toPrint.c_str());
+		toPrint = "";
 	}
 }
 
