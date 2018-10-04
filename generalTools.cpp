@@ -17,7 +17,7 @@ void printBoard(Board* myBoard)
 	{
 		for (int x = 0; x < x_size; x++)
 		{
-			currentTile = currentTileset->getXY();
+			currentTile = currentTileset->getXY(x, y);
 			if (currentTile->getWall())
 			{
 				toPrint = toPrint + "#";
