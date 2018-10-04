@@ -42,6 +42,20 @@ Tileset* Board::getAllTiles()
 	return boardTileset;
 }
 
+int Board::getXSize()
+{
+	return x_size;
+}
+
+int Board::getYSize()
+{
+	return y_size;
+}
+
+Tileset* Board::getOuterWall()
+{
+	return outerWalls;
+}
 void Board::addOuterWalls()
 {
 	outerWalls->add(boardTileset->getAllY(0));

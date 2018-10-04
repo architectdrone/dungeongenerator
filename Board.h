@@ -21,6 +21,9 @@ public:
 
 	//GETTERS
 	Tileset* getAllTiles(); //Returns the internal Tileset
+	Tileset* getOuterWall(); //Returns the outer wall
+	int getXSize();
+	int getYSize();
 
 	//CLASS SPECIFIC
 	void addOuterWalls(); //Adds outer walls to the board
