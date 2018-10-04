@@ -14,6 +14,18 @@ Tileset::~Tileset()
 	delete allTiles;
 }
 
+void Tileset::destroyTiles()
+{
+	//Create iterator
+	list<Tile*>::iterator it = allTiles->begin();
+
+	//Do a for loop, stop when the pointer is the last one.
+	for (it; it != allTiles->end(); it++)
+	{
+		delete *it;
+	}
+}
+
 Tileset* Tileset::getAllWalls()
 {
 	Tileset* toReturn = new Tileset();
