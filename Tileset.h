@@ -10,10 +10,11 @@
 #include "Tile.h"
 #include <list>
 #include <iostream>
+
 class Tileset
 {
 private:
-	list<Tile*>* allTiles;
+	std::list <Tile*> * allTiles;
 
 public:
 	//CONSTRUCTOR
