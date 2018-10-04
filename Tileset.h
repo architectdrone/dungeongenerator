@@ -46,6 +46,7 @@ public:
 	//CLASS SPECIFIC
 	void add(Tile *newTile); //Adds the newTile to tileset.
 	void add(Tileset *newTileset); //Adds the entirety of the tileset to the original tileset.
+	void remove(Tile* toRemove); //Removes (Does NOT delete) a tile from the tileset.
 };
 
 #endif

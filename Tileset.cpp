@@ -238,4 +238,17 @@ void Tileset::add(Tileset* newTileset)
 	}
 }
 
+void Tileset::remove(Tile* toRemove)
+{
+	//Create iterator
+	list<Tile*>::iterator it = allTiles->begin();
 
+	//Do a for loop, stop when the pointer is the last one.
+	for (it; it != allTiles->end(); it++)
+	{
+		if (*it == toRemove)
+		{
+			allTiles->erase(it);
+		}
+	}
+}
