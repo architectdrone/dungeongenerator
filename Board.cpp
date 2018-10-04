@@ -12,6 +12,7 @@ Board::Board(int x, int y)
 		for (int x = 0; x < x_size; x++)
 		{
 			Tile* newTile = new Tile(x, y);
+			boardTileset->add(newTile);
 		}
 	}
 }
@@ -25,6 +26,13 @@ Board::Board(int size)
 		for (int x = 0; x < x_size; x++)
 		{
 			Tile* newTile = new Tile(x, y);
+			boardTileset->add(newTile);
 		}
 	}
+}
+
+Board::~Board()
+{
+	boardTileset->destroyTiles();
+	delete boardTileset;
 }
