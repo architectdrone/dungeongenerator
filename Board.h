@@ -13,7 +13,8 @@ private:
 
 public:
 	//CONSTRUCTORS
-	Board(int x, int y);
+	Board(int x, int y); //Creates a board of size x_size*y_size
+	Board(int size); //Creates a board of size size*size
 
 	//DESTRUCTORS
 	~Board();
