@@ -164,15 +164,6 @@ void Tileset::setAllNonWall()
 	}
 }
 
-void Tileset::add(Tile * newTile )
-{
-	if (!isInTileset(newTile))
-	{
-		allTiles->push_back(newTile);
-	}
-	
-}
-
 bool Tileset::isInTileset(Tile *myTile)
 {
 	//Create iterator
@@ -188,3 +179,30 @@ bool Tileset::isInTileset(Tile *myTile)
 	}
 	return false;
 }
+
+bool Tileset::isInTileset(int x, int y)
+{
+
+	//Create iterator
+	list<Tile*>::iterator it = allTiles->begin();
+
+	//Do a for loop, stop when the pointer is the last one.
+	for (it; it != allTiles->end(); it++)
+	{
+		if ((((*it)->getX()) == x) && (((*it)->getY()) == y))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+void Tileset::add(Tile * newTile )
+{
+	if (!isInTileset(newTile))
+	{
+		allTiles->push_back(newTile);
+	}
+	
+}
+
+
