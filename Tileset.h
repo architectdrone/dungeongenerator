@@ -47,6 +47,7 @@ public:
 	void add(Tile *newTile); //Adds the newTile to tileset.
 	void add(Tileset *newTileset); //Adds the entirety of the tileset to the original tileset.
 	void remove(Tile* toRemove); //Removes (Does NOT delete) a tile from the tileset.
+	void remove(Tileset* toRemove); //Removes (Does NOT delete) all tiles within the given tileset from the original tileset.
 };
 
 #endif
