@@ -20,10 +20,10 @@ public:
 	~Board();
 
 	//GETTERS
-	Tileset* getAllTiles();
+	Tileset* getAllTiles(); //Returns the internal Tileset
 
 	//CLASS SPECIFIC
-	void addOuterWalls();
+	void addOuterWalls(); //Adds outer walls to the board
 
 };
 

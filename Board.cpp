@@ -36,3 +36,17 @@ Board::~Board()
 	boardTileset->destroyTiles();
 	delete boardTileset;
 }
+
+Tileset* Board::getAllTiles()
+{
+	return boardTileset;
+}
+
+void Board::addOuterWalls()
+{
+	outerWalls->add(boardTileset->getAllY(0));
+	outerWalls->add(boardTileset->getAllY(y_size-1));
+	outerWalls->add(boardTileset->getAllX(0));
+	outerWalls->add(boardTileset->getAllX(x_size - 1));
+	outerWalls->setAllWall();
+}
