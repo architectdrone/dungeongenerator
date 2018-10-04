@@ -32,6 +32,7 @@ public:
 	Tile* getXY(int x, int y) throw(std::out_of_range); //Returns the tile with the given x and y coordinates. If none is found, throw an error.
 	Tile* getTile(int i) throw(std::out_of_range); //Gets the ith tile. Remember, the first tile is at 0, the last is at len-1. Throws error if out of bounds.
 	int getLength(); //Returns the length of the tileset.
+	std::list<Tile*>* getTileList(); //Returns the tiles in list format. 
 
 	//SETTERS
 	void setAllWall(); //Sets all tiles in the tileset to be walls.

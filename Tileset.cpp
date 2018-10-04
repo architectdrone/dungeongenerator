@@ -140,6 +140,11 @@ int Tileset::getLength()
 	return allTiles->size();
 }
 
+list<Tile*>* Tileset::getTileList()
+{
+	return allTiles;
+}
+
 void Tileset::setAllWall()
 {
 	//Create iterator
@@ -196,6 +201,7 @@ bool Tileset::isInTileset(int x, int y)
 	}
 	return false;
 }
+
 void Tileset::add(Tile * newTile )
 {
 	if (!isInTileset(newTile))
@@ -203,6 +209,18 @@ void Tileset::add(Tile * newTile )
 		allTiles->push_back(newTile);
 	}
 	
+}
+
+void Tileset::add(Tileset* newTileset)
+{
+	//Create iterator
+	list<Tile*>::iterator it = (newTileset->getTileList())->begin();
+
+	//Do a for loop, stop when the pointer is the last one.
+	for (it; it != allTiles->end(); it++)
+	{
+		add(*it);
+	}
 }
 
 
