@@ -249,6 +249,8 @@ void Tileset::remove(Tile* toRemove)
 		if (*it == toRemove)
 		{
 			allTiles->erase(it);
+			return;
+
 		}
 	}
 }
