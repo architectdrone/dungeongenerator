@@ -40,7 +40,27 @@ Tileset* Tileset::getAllWalls()
 	}
 }
 
-void Tileset::add(Tile & newTile)
+void Tileset::add(Tile * newTile )
 {
-	allTiles -> insert(newTile, 0 );
+	if (!isInTileset(newTile))
+	{
+		allTiles->push_back(newTile);
+	}
+	
+}
+
+bool Tileset::isInTileset(Tile *myTile)
+{
+	//Create iterator
+	list<Tile*>::iterator it = allTiles->begin();
+
+	//Do a for loop, stop when the pointer is the last one.
+	for (it; it != allTiles->end(); it++)
+	{
+		if (myTile == *it)
+		{
+			return true;
+		}
+	}
+	return false;
 }

@@ -38,12 +38,12 @@ public:
 	void setAllNonWall(); //Sets all tiles in the tileset to be non-walls.
 
 	//TESTERS
-	bool isInTileset(Tile &myTile); //Tests to see whether or not the given tile is in the tileset.
+	bool isInTileset(Tile *myTile); //Tests to see whether or not the given tile is in the tileset.
 	bool isInTileset(int x, int y); //Tests to see whether or not the given coord is in the tileset.
 
 	//CLASS SPECIFIC
-	void add(Tile &newTile); //Adds the newTile to tileset.
-	void add(Tileset &newTileset); //Adds the entirety of the tileset to the original tileset.
+	void add(Tile *newTile); //Adds the newTile to tileset.
+	void add(Tileset *newTileset); //Adds the entirety of the tileset to the original tileset.
 };
 
 #endif
