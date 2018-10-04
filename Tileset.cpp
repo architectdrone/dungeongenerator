@@ -232,7 +232,7 @@ void Tileset::add(Tileset* newTileset)
 	list<Tile*>::iterator it = (newTileset->getTileList())->begin();
 
 	//Do a for loop, stop when the pointer is the last one.
-	for (it; it != allTiles->end(); it++)
+	for (it; it != (newTileset->getTileList())->end(); it++)
 	{
 		add(*it);
 	}
