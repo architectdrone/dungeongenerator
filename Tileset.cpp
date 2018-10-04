@@ -134,6 +134,12 @@ Tile* Tileset::getTile(int i) throw(std::out_of_range)
 
 	throw(std::out_of_range("Out of bounds."));
 }
+
+int Tileset::getLength()
+{
+	return allTiles->size();
+}
+
 void Tileset::add(Tile * newTile )
 {
 	if (!isInTileset(newTile))
