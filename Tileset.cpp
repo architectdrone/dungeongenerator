@@ -9,9 +9,24 @@ Tileset::Tileset()
 	allTiles = new list<Tile*>;
 }
 
+Tileset::Tileset(const Tileset &oldTileset)
+{
+	allTiles = new list<Tile*>;
+
+	//Create iterator
+	list<Tile*>::iterator it = (oldTileset.getTileList())->begin();
+
+	//Do a for loop, stop when the pointer is the last one.
+	for (it; it != allTiles->end(); it++)
+	{
+		add(*it);
+	}
+}
+
 Tileset::~Tileset()
 {
 	delete allTiles;
+
 }
 
 void Tileset::destroyTiles()
@@ -140,7 +155,7 @@ int Tileset::getLength()
 	return allTiles->size();
 }
 
-list<Tile*>* Tileset::getTileList()
+list<Tile*>* Tileset::getTileList() const
 {
 	return allTiles;
 }
