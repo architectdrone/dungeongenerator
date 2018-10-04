@@ -80,6 +80,25 @@ Tileset* Tileset::getAllX(int x)
 	return toReturn;
 }
 
+Tileset* Tileset::getAllY(int y)
+{
+	Tileset* toReturn = new Tileset();
+
+	//Create iterator
+	list<Tile*>::iterator it = allTiles->begin();
+
+	//Do a for loop, stop when the pointer is the last one.
+	for (it; it != allTiles->end(); it++)
+	{
+		if (((*it)->getY()) == y)
+		{
+			toReturn->add(*it);
+		}
+	}
+	return toReturn;
+}
+
+
 void Tileset::add(Tile * newTile )
 {
 	if (!isInTileset(newTile))
