@@ -98,7 +98,42 @@ Tileset* Tileset::getAllY(int y)
 	return toReturn;
 }
 
+Tile* Tileset::getXY(int x, int y) throw (std::out_of_range)
+{
 
+	//Create iterator
+	list<Tile*>::iterator it = allTiles->begin();
+
+	//Do a for loop, stop when the pointer is the last one.
+	for (it; it != allTiles->end(); it++)
+	{
+		if ((((*it)->getX()) == x) && (((*it)->getY()) == y))
+		{
+			return *it;
+		}
+	}
+	throw(std::out_of_range("X, Y coordinates not found in tileset."));
+}
+
+Tile* Tileset::getTile(int i) throw(std::out_of_range)
+{
+	int curPos = 0;
+
+	//Create iterator
+	list<Tile*>::iterator it = allTiles->begin();
+
+	//Do a for loop, stop when the pointer is the last one.
+	for (it; it != allTiles->end(); it++)
+	{
+		if (curPos == i)
+		{
+			return *it;
+		}
+		i++;
+	}
+
+	throw(std::out_of_range("Out of bounds."));
+}
 void Tileset::add(Tile * newTile )
 {
 	if (!isInTileset(newTile))

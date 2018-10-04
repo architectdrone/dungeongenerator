@@ -30,7 +30,7 @@ public:
 	Tileset* getAllX(int x); //Returns a tileset containing all tiles with the given x-coordinate within the original tileset.
 	Tileset* getAllY(int y); //Returns a tileset containing all tiles with the given y-coordinate within the original tileset.
 	Tile* getXY(int x, int y) throw(std::out_of_range); //Returns the tile with the given x and y coordinates. If none is found, throw an error.
-	Tile* getTile(int i); //Gets the ith tile. Remember, the first tile is at 0, the last is at len-1.
+	Tile* getTile(int i) throw(std::out_of_range); //Gets the ith tile. Remember, the first tile is at 0, the last is at len-1. Throws error if out of bounds.
 	int getLength(); //Returns the length of the tileset.
 
 	//SETTERS
