@@ -11,8 +11,11 @@ Tileset::Tileset()
 
 Tileset::~Tileset()
 {
-	//We must delete all of the tiles individually, since they are merely pointers.
+	delete allTiles;
+}
 
+void Tileset::destroyTiles()
+{
 	//Create iterator
 	list<Tile*>::iterator it = allTiles->begin();
 
@@ -21,9 +24,6 @@ Tileset::~Tileset()
 	{
 		delete *it;
 	}
-
-	//Then delete the list
-	delete allTiles;
 }
 
 Tileset* Tileset::getAllWalls()

@@ -23,6 +23,7 @@ public:
 
 	//DESTRUCTOR
 	~Tileset();
+	void destroyTiles(); //Deletes all tiles within the tileset. Careful: This deletes all tiles within, even those used by other tilesets!
 
 	//GETTERS
 	Tileset* getAllWalls(); //Returns a tileset containing all walls within the original tileset.
