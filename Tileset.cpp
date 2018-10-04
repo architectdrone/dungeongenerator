@@ -140,6 +140,18 @@ int Tileset::getLength()
 	return allTiles->size();
 }
 
+void Tileset::setAllWall()
+{
+	//Create iterator
+	list<Tile*>::iterator it = allTiles->begin();
+
+	//Do a for loop, stop when the pointer is the last one.
+	for (it; it != allTiles->end(); it++)
+	{
+		(*it)->makeWall();
+	}
+}
+
 void Tileset::add(Tile * newTile )
 {
 	if (!isInTileset(newTile))
