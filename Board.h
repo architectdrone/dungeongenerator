@@ -13,7 +13,7 @@ private:
 
 public:
 	//CONSTRUCTORS
-	Board();
+	Board(int x, int y);
 
 	//DESTRUCTORS
 	~Board();
