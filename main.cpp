@@ -32,7 +32,12 @@ void printBoard(Board* myBoard)
 
 int main()
 {
-	Board myBoard(10);
+
+	Board myBoard(30, 10);
 	myBoard.addOuterWalls();
 	printBoard(&myBoard);
+	int stop;
+	cin >> stop;
+	delete &myBoard;
+
 }

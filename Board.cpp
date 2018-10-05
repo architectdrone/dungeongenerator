@@ -38,8 +38,10 @@ Board::Board(int size)
 
 Board::~Board()
 {
+	cout << "Deleting board!" << endl;
 	boardTileset->destroyTiles();
 	delete boardTileset;
+	delete outerWalls;
 }
 
 Tileset* Board::getAllTiles()
@@ -63,9 +65,21 @@ Tileset* Board::getOuterWall()
 }
 void Board::addOuterWalls()
 {
-	outerWalls->add(boardTileset->getAllY(0));
-	outerWalls->add(boardTileset->getAllY(y_size-1));
-	outerWalls->add(boardTileset->getAllX(0));
-	outerWalls->add(boardTileset->getAllX(x_size - 1));
+	Tileset* newTileset = boardTileset->getAllY(0);
+	outerWalls->add(newTileset);
+	delete newTileset;
+
+	newTileset = boardTileset->getAllY(y_size-1);
+	outerWalls->add(newTileset);
+	delete newTileset;
+
+	newTileset = boardTileset->getAllX(0);
+	outerWalls->add(newTileset);
+	delete newTileset;
+
+	newTileset = boardTileset->getAllX(x_size -1 );
+	outerWalls->add(newTileset);
+	delete newTileset;
+
 	outerWalls->setAllWall();
 }
