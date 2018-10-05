@@ -1,3 +1,10 @@
+/**
+* @author Owen Mellema
+* @file Board.h
+* @date 10-04-18
+* @brief A grid of tiles encompassing a certain range in the 2D plane
+**/
+
 #ifndef BOARD_H
 #define BOARD_H
 #include "Tileset.h"
@@ -13,19 +20,46 @@ private:
 
 public:
 	//CONSTRUCTORS
-	Board(int x, int y); //Creates a board of size x_size*y_size
-	Board(int size); //Creates a board of size size*size
+	/**
+	* @pre X and Y are greater than 0
+	* @param X:  X is the size of the board in the X direction
+	* @param Y: Y is the size of the board in the X direction
+	**/
+	Board(int x, int y);
+	/**
+	* @pre size are greater than 0
+	* @param size:  size is the size of the board in the X and Y directions
+	**/
+	Board(int size);
 
 	//DESTRUCTORS
+	/**
+	* @post Board is deleted, AND all tiles inside are destroyed.
+	**/
 	~Board();
 
 	//GETTERS
-	Tileset* getAllTiles(); //Returns the internal Tileset
-	Tileset* getOuterWall(); //Returns the outer wall
+	/**
+	* @return A tileset containing all tiles within the board.
+	**/
+	Tileset* getAllTiles();
+	/**
+	* @return A tileset containing all tiles in the outside wall, EVEN IF IT HAS NOT BEEN CREATED YET!
+	**/
+	Tileset* getOuterWall();
+	/**
+	* @return Size in the X direction
+	**/
 	int getXSize();
+	/**
+	* @return Size in the Y direction
+	**/
 	int getYSize();
 
 	//CLASS SPECIFIC
+	/**
+	* @post Walls now encompass the board.
+	**/
 	void addOuterWalls(); //Adds outer walls to the board
 
 };
