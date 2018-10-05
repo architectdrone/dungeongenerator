@@ -26,12 +26,10 @@ Tileset::Tileset(const Tileset &oldTileset)
 Tileset::~Tileset()
 {
 	delete allTiles;
-	cout << "Deleting Tileset!" << endl;
 }
 
 void Tileset::destroyTiles()
 {
-	cout << "Destroying Tiles!" << endl;
 	//Create iterator
 	list<Tile*>::iterator it = allTiles->begin();
 

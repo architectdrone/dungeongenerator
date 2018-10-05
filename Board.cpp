@@ -38,7 +38,6 @@ Board::Board(int size)
 
 Board::~Board()
 {
-	cout << "Deleting board!" << endl;
 	boardTileset->destroyTiles();
 	delete boardTileset;
 	delete outerWalls;
