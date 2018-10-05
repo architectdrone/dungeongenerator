@@ -38,6 +38,4 @@ int main()
 	printBoard(&myBoard);
 	int stop;
 	cin >> stop;
-	delete &myBoard;
-
 }
