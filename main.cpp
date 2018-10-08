@@ -10,12 +10,13 @@ void printBoard(Board* myBoard)
 	int y_size = myBoard->getYSize();
 	Tile* currentTile;
 	Tileset* currentTileset = myBoard->getAllTiles();
+	list<Tile*>::iterator it = currentTileset->getTileList()->begin();
 	string toPrint = "";
 	for (int y = 0; y < y_size; y++)
 	{
 		for (int x = 0; x < x_size; x++)
 		{
-			currentTile = currentTileset->getXY(x, y);
+			currentTile = *it;
 			if (currentTile->getWall())
 			{
 				toPrint = toPrint + "#";
@@ -25,6 +26,7 @@ void printBoard(Board* myBoard)
 				toPrint = toPrint + " ";
 			}
 		}
+		it++;
 		printf("%s\n", toPrint.c_str());
 		toPrint = "";
 	}
@@ -158,8 +160,27 @@ Tile* getRandomTile(Tileset* myTileset)
 int main()
 {
 
-	Board myBoard(30, 10);
+	Board myBoard(100, 100);
 	myBoard.addOuterWalls();
+	printBoard(&myBoard);
+
+	bool horizontal = true;
+	for (int i = 0; i < 20; i++)
+	{
+		if (horizontal)
+		{
+			horizontal = false;
+		}
+		else
+		{
+			horizontal = true;
+		}
+
+		Tileset myEdges = edgeTiles(&myBoard, horizontal);
+		Tile* myTile = getRandomTile(&myEdges);
+		Tileset myNewStraight = straightGenerator(&myBoard, myTile, horizontal);
+		myNewStraight.setAllWall();
+	}
 	printBoard(&myBoard);
 
 	int stop;

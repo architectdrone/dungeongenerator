@@ -143,7 +143,7 @@ Tile* Tileset::getTile(int i) throw(std::out_of_range)
 		{
 			return *it;
 		}
-		i++;
+		curPos++;
 	}
 
 	throw(std::out_of_range("Out of bounds."));
