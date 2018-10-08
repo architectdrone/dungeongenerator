@@ -129,6 +129,32 @@ Tileset straightGenerator(Board* theBoard, Tile* startTile, bool goingRight)
 	return toReturn;
 }
 
+int getRandomNumber(int low, int high)
+{
+	/**
+	* @pre high > low
+	* @throw an error if high < low
+	* @param low: The lowest number that can be generated.
+	* @param high: The highest number that can be generated.
+	* @return a random number in the range [low, high]
+	**/
+
+	if (high < low)
+	{
+		throw(std::out_of_range("High must be greater than low."));
+	}
+	return low+rand()%(high-low+1);
+}
+
+Tile* getRandomTile(Tileset* myTileset)
+{
+	/**
+	* @param myTileset: The tileset to get a random tile from.
+	* @return A random tile from the tileset.
+	**/
+	return (myTileset->getTile(getRandomNumber(0, (myTileset->getLength()) - 1)));
+}
+
 int main()
 {
 
