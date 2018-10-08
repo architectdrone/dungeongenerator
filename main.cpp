@@ -25,8 +25,9 @@ void printBoard(Board* myBoard)
 			{
 				toPrint = toPrint + " ";
 			}
+			it++;
 		}
-		it++;
+		
 		printf("%s\n", toPrint.c_str());
 		toPrint = "";
 	}
