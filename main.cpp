@@ -86,12 +86,56 @@ Tileset edgeTiles(Board* toTest, bool goingRight)
 	return toReturn;
 }
 
+Tileset straightGenerator(Board* theBoard, Tile* startTile, bool goingRight)
+{
+	/**
+	* @param startTile: The tile that we are starting at.
+	* @param goingRight: Whether the straight will be going rightwards or downwards.
+	* @param theBoard: The board containing all of the tiles.
+	* @return A tileset containing a new straight
+	**/
+	int x = startTile->getX();
+	int y = startTile->getY();
+	Tileset toReturn;
+
+	while (true)
+	{
+		if ((x >= theBoard->getXSize()) || (y >= theBoard->getYSize()))
+		{
+			break;
+		}
+
+		Tile* myTile;
+		if (goingRight)
+		{
+			myTile = theBoard->getAllTiles()->getXY(x + 1, y);
+			x++;
+		}
+		else
+		{
+			myTile = theBoard->getAllTiles()->getXY(x, y + 1);
+			y++;
+		}
+
+		if (!(myTile->getWall()))
+		{
+			toReturn.add(myTile);
+		}
+		else
+		{
+			break;
+		}
+	}
+	return toReturn;
+}
+
 int main()
 {
 
 	Board myBoard(30, 10);
 	myBoard.addOuterWalls();
 	printBoard(&myBoard);
+
 	int stop;
 	cin >> stop;
 }
