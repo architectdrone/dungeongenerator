@@ -42,7 +42,8 @@ Tileset edgeTiles(Board* toTest, bool goingRight)
 	**/
 
 	//The pointer to the list of tiles being looked at.
-	list<Tile*>* myList = ((toTest->getAllTiles())->getTileList()); 
+	Tileset* currentTileset = toTest->getAllTiles()->getAllWalls();
+	list<Tile*>* myList = currentTileset -> getTileList(); 
 
 	//The tileset to return
 	Tileset toReturn;
@@ -64,10 +65,10 @@ Tileset edgeTiles(Board* toTest, bool goingRight)
 				{
 					continue;
 				}
-				Tile* myTile = toTest->getAllTiles()->getXY(x + 1, y);
-				if (!(myTile->getWall()))
+				
+				if (!(currentTileset->isInTileset(x+1,y)))
 				{
-					toReturn.add(*it);
+					toReturn.addNoCheck(*it);
 				}
 			}
 			else
@@ -77,10 +78,9 @@ Tileset edgeTiles(Board* toTest, bool goingRight)
 				{
 					continue;
 				}
-				Tile* myTile = toTest->getAllTiles()->getXY(x, y + 1);
-				if (!(myTile->getWall()))
+				if (!(currentTileset->isInTileset(x, y+1)))
 				{
-					toReturn.add(*it);
+					toReturn.addNoCheck(*it);
 				}
 			}
 		}
@@ -177,6 +177,7 @@ int main()
 			horizontal = true;
 		}
 
+		
 		Tileset myEdges = edgeTiles(&myBoard, horizontal);
 		Tile* myTile = getRandomTile(&myEdges);
 		Tileset myNewStraight = straightGenerator(&myBoard, myTile, horizontal);
