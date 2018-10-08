@@ -89,7 +89,7 @@ Tileset edgeTiles(Board* toTest, bool goingRight)
 	return toReturn;
 }
 
-Tileset straightGenerator(Board* theBoard, Tile* startTile, bool goingRight)
+Tileset* straightGenerator(Board* theBoard, Tile* startTile, bool goingRight)
 {
 	/**
 	* @param startTile: The tile that we are starting at.
@@ -99,7 +99,7 @@ Tileset straightGenerator(Board* theBoard, Tile* startTile, bool goingRight)
 	**/
 	int x = startTile->getX();
 	int y = startTile->getY();
-	Tileset toReturn;
+	Tileset* toReturn = new Tileset;
 
 	while (true)
 	{
@@ -122,13 +122,14 @@ Tileset straightGenerator(Board* theBoard, Tile* startTile, bool goingRight)
 
 		if (!(myTile->getWall()))
 		{
-			toReturn.add(myTile);
+			toReturn->add(myTile);
 		}
 		else
 		{
 			break;
 		}
 	}
+
 	return toReturn;
 }
 
@@ -163,25 +164,31 @@ int main()
 
 	Board myBoard(100, 100);
 	myBoard.addOuterWalls();
-	printBoard(&myBoard);
+	//printBoard(&myBoard);
 
 	bool horizontal = true;
+	Tileset horizontalEdges = edgeTiles(&myBoard, true);
+	Tileset verticalEdges = edgeTiles(&myBoard, false);
+	Tileset* currentEdges;
+	Tileset* newStraight;
 	for (int i = 0; i < 20; i++)
 	{
 		if (horizontal)
 		{
 			horizontal = false;
+			currentEdges = &verticalEdges;
 		}
 		else
 		{
 			horizontal = true;
+			currentEdges = &horizontalEdges;
 		}
 
 		
-		Tileset myEdges = edgeTiles(&myBoard, horizontal);
-		Tile* myTile = getRandomTile(&myEdges);
-		Tileset myNewStraight = straightGenerator(&myBoard, myTile, horizontal);
-		myNewStraight.setAllWall();
+		Tile* myTile = getRandomTile(currentEdges);
+		newStraight = straightGenerator(&myBoard, myTile, horizontal);
+		newStraight->setAllWall();
+		currentEdges->add(newStraight);
 	}
 	printBoard(&myBoard);
 
