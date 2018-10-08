@@ -56,11 +56,12 @@ Tileset edgeTiles(Board* toTest, bool goingRight)
 		{
 			if (goingRight)
 			{
-				Tile* myTile = toTest->getAllTiles()->getXY(x + 1, y);
-				if (!(x < toTest->getXSize()))
+				
+				if (!((x+1) < toTest->getXSize()))
 				{
 					continue;
 				}
+				Tile* myTile = toTest->getAllTiles()->getXY(x + 1, y);
 				if (!(myTile->getWall()))
 				{
 					toReturn.add(*it);
@@ -68,11 +69,12 @@ Tileset edgeTiles(Board* toTest, bool goingRight)
 			}
 			else
 			{
-				Tile* myTile = toTest->getAllTiles()->getXY(x, y - 1);
-				if (!(y < toTest->getYSize()))
+				
+				if (!((y+1) < toTest->getYSize()))
 				{
 					continue;
 				}
+				Tile* myTile = toTest->getAllTiles()->getXY(x, y + 1);
 				if (!(myTile->getWall()))
 				{
 					toReturn.add(*it);
@@ -90,7 +92,6 @@ int main()
 	Board myBoard(30, 10);
 	myBoard.addOuterWalls();
 	printBoard(&myBoard);
-
 	int stop;
 	cin >> stop;
 }
