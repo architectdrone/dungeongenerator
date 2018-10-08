@@ -15,7 +15,7 @@ Board::Board(int x, int y)
 		for (int x = 0; x < x_size; x++)
 		{
 			Tile* newTile = new Tile(x, y);
-			boardTileset->add(newTile);
+			boardTileset->addNoCheck(newTile);
 		}
 	}
 }

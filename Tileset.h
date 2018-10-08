@@ -98,6 +98,11 @@ public:
 	**/
 	void add(Tileset *newTileset); 
 	/**
+	* @param newTile: The Tileset to add to the Tileset.
+	* @post Tile is added to the tileset without checking to see if it already a part of the tileset.
+	**/
+	void addNoCheck(Tile *newTile);
+	/**
 	* @param toRemove: The Tile to remove from the Tileset.
 	* @post toRemove is now no longer a part of the tileset.
 	**/

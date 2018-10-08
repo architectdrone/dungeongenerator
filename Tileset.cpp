@@ -225,6 +225,11 @@ void Tileset::add(Tile * newTile )
 	
 }
 
+void Tileset::addNoCheck(Tile* newTile)
+{
+	allTiles->push_back(newTile);
+}
+
 void Tileset::add(Tileset* newTileset)
 {
 	//Create iterator
