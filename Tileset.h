@@ -64,7 +64,7 @@ public:
 	/**
 	* @return the list of tiles in list format
 	**/
-	std::list<Tile*>* getTileList() const; //Returns the tiles in list format. 
+	std::list<Tile*>* getTileList() const; 
 
 	//SETTERS
 	/**
@@ -101,12 +101,12 @@ public:
 	* @param toRemove: The Tile to remove from the Tileset.
 	* @post toRemove is now no longer a part of the tileset.
 	**/
-	void remove(Tile* toRemove); //Removes (Does NOT delete) a tile from the tileset.
+	void remove(Tile* toRemove);
 	/**
 	* @param toRemove: The Tileset to remove from the Tileset.
 	* @post None of the elements of toRemove are a part of the tileset.
 	**/
-	void remove(Tileset* toRemove); //Removes (Does NOT delete) all tiles within the given tileset from the original tileset.
+	void remove(Tileset* toRemove);
 };
 
 #endif
