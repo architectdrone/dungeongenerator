@@ -23,30 +23,89 @@ public:
 
 	//DESTRUCTOR
 	~Tileset();
-	void destroyTiles(); //Deletes all tiles within the tileset. Careful: This deletes all tiles within, even those used by other tilesets!
-
+	/**
+	* @post: Deletes all of the tiles from the heap.
+	**/
+	void destroyTiles(); 
+	
 	//GETTERS
-	Tileset* getAllWalls(); //Returns a tileset containing all walls within the original tileset.
-	Tileset* getAllNonWalls(); //Returns a tileset containing all non-walls within the original tileset.
-	Tileset* getAllX(int x); //Returns a tileset containing all tiles with the given x-coordinate within the original tileset.
-	Tileset* getAllY(int y); //Returns a tileset containing all tiles with the given y-coordinate within the original tileset.
-	Tile* getXY(int x, int y) throw(std::out_of_range); //Returns the tile with the given x and y coordinates. If none is found, throw an error.
-	Tile* getTile(int i) throw(std::out_of_range); //Gets the ith tile. Remember, the first tile is at 0, the last is at len-1. Throws error if out of bounds.
+	/**
+	* @return A Tileset containing all walls within the original tileset.
+	**/
+	Tileset* getAllWalls();
+	/**
+	* @return A Tileset containing all non-walls within the original tileset.
+	**/
+	Tileset* getAllNonWalls();
+	/**
+	* @return a tileset containing all tiles with the given x-coordinate within the original tileset.
+	**/
+	Tileset* getAllX(int x);
+	/**
+	* @return a tileset containing all tiles with the given y-coordinate within the original tileset.
+	**/
+	Tileset* getAllY(int y); 
+	/**
+	* @pre There is a tile at the specified x and y coordinates
+	* @return the tile with the given x and y coordinates.
+	* @throw Throws an error if no tile is found at the specified X and Y coordinates
+	**/
+	Tile* getXY(int x, int y) throw(std::out_of_range);
+	/**
+	* @pre There is a tile at the specified i.
+	* @return the ith tile. Remember, the first tile is at 0, the last is at len-1.
+	* @throw Throws error if out of bounds.
+	**/
+	Tile* getTile(int i) throw(std::out_of_range);
+	/**
+	* @return the length of the tileset
+	**/
 	int getLength(); //Returns the length of the tileset.
+	/**
+	* @return the list of tiles in list format
+	**/
 	std::list<Tile*>* getTileList() const; //Returns the tiles in list format. 
 
 	//SETTERS
-	void setAllWall(); //Sets all tiles in the tileset to be walls.
-	void setAllNonWall(); //Sets all tiles in the tileset to be non-walls.
+	/**
+	* @post All tiles in the tileset are now walls.
+	**/
+	void setAllWall();
+	/**
+	* @post All tiles in the tileset are now non-walls.
+	**/
+	void setAllNonWall(); 
 
 	//TESTERS
-	bool isInTileset(Tile *myTile); //Tests to see whether or not the given tile is in the tileset.
+	/**
+	* @return true if the tile is in the tileset, false otherwise
+	**/
+	bool isInTileset(Tile *myTile); 
+	/**
+	* @return true if there is a in the tileset at the given X and Y coordinates, false otherwise
+	**/
 	bool isInTileset(int x, int y); //Tests to see whether or not the given coord is in the tileset.
 
 	//CLASS SPECIFIC
-	void add(Tile *newTile); //Adds the newTile to tileset.
-	void add(Tileset *newTileset); //Adds the entirety of the tileset to the original tileset.
+	/**
+	* @param newTile: The tile to add to the Tileset.
+	* @post newTile is now a part of the tileset.
+	**/
+	void add(Tile *newTile);
+	/**
+	* @param newTileset: The Tileset to add to the Tileset.
+	* @post All of the elements of newTileset are now a part of the tileset.
+	**/
+	void add(Tileset *newTileset); 
+	/**
+	* @param toRemove: The Tile to remove from the Tileset.
+	* @post toRemove is now no longer a part of the tileset.
+	**/
 	void remove(Tile* toRemove); //Removes (Does NOT delete) a tile from the tileset.
+	/**
+	* @param toRemove: The Tileset to remove from the Tileset.
+	* @post None of the elements of toRemove are a part of the tileset.
+	**/
 	void remove(Tileset* toRemove); //Removes (Does NOT delete) all tiles within the given tileset from the original tileset.
 };
 
