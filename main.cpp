@@ -197,9 +197,10 @@ void addStraights(Board* theBoard, int number)
 	Tileset* newStraight;
 	for (int i = 0; i < number; i++)
 	{
+		//Toggle horizontal and vertical
 		if (horizontal)
 		{
-			horizontal = false;
+			horizontal = false; 
 			currentEdges = &verticalEdges;
 			nonCurrentEdges = &horizontalEdges;
 		}
@@ -209,11 +210,15 @@ void addStraights(Board* theBoard, int number)
 			currentEdges = &horizontalEdges;
 			nonCurrentEdges = &verticalEdges;
 		}
-
+		//Get a random tile from the Tileset.
 		Tile* myTile = getRandomTile(currentEdges);
+		//Create a new straight starting from the tile that we chose.
 		newStraight = straightGenerator(theBoard, myTile, horizontal);
+		//Make them all walls.
 		newStraight->setAllWall();
+		//See algorithim notes. 
 		nonCurrentEdges->add(newStraight);
+
 	}
 }
 
