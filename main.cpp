@@ -2,6 +2,7 @@
 #include "Tile.h"
 #include "Tileset.h"
 #include "Board.h"
+#include <ctime>
 using namespace std;
 
 void printBoard(Board* myBoard)
@@ -119,18 +120,16 @@ Tileset* straightGenerator(Board* theBoard, Tile* startTile, bool goingRight)
 			myTile = theBoard->getAllTiles()->getXY(x, y + 1);
 			y++;
 		}
-
 		if (!(myTile->getWall()))
 		{
 			toReturn->add(myTile);
+			
 		}
 		else
 		{
 			break;
 		}
-	}
-
-	return toReturn;
+	}	return toReturn;
 }
 
 int getRandomNumber(int low, int high)
@@ -147,6 +146,7 @@ int getRandomNumber(int low, int high)
 	{
 		throw(std::out_of_range("High must be greater than low."));
 	}
+	srand((unsigned)time(0));
 	return low+rand()%(high-low+1);
 }
 
@@ -170,6 +170,7 @@ int main()
 	Tileset horizontalEdges = edgeTiles(&myBoard, true);
 	Tileset verticalEdges = edgeTiles(&myBoard, false);
 	Tileset* currentEdges;
+	Tileset* nonCurrentEdges;
 	Tileset* newStraight;
 	for (int i = 0; i < 20; i++)
 	{
@@ -177,18 +178,21 @@ int main()
 		{
 			horizontal = false;
 			currentEdges = &verticalEdges;
+			nonCurrentEdges = &horizontalEdges;
 		}
 		else
 		{
 			horizontal = true;
 			currentEdges = &horizontalEdges;
+			nonCurrentEdges = &verticalEdges;
 		}
 
 		
+
 		Tile* myTile = getRandomTile(currentEdges);
 		newStraight = straightGenerator(&myBoard, myTile, horizontal);
 		newStraight->setAllWall();
-		currentEdges->add(newStraight);
+		nonCurrentEdges->add(newStraight);
 	}
 	printBoard(&myBoard);
 
