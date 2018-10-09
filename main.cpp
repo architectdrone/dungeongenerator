@@ -159,20 +159,43 @@ Tile* getRandomTile(Tileset* myTileset)
 	return (myTileset->getTile(getRandomNumber(0, (myTileset->getLength()) - 1)));
 }
 
-int main()
+void addStraights(Board* theBoard, int number)
 {
+	/**
+	* @pre Board has outer walls.
+	* @pre Board is empty except for outer walls.
+	* @param theBoard: The board to add straights to.
+	* @param number: The upper limit of straights to add.
+	* @post A number of straights (0 < #newStraights <= number) has been added to the board. The reason it isn't equal is because of an algorithim bug.
+	**/
 
-	Board myBoard(100, 100);
-	myBoard.addOuterWalls();
-	//printBoard(&myBoard);
+	/*
+	How it works:
+	First, consider the previous solution. Before implementing this version, the previous straight placer would check every wall tile to see if it was a suitable edge.
+	By "suitable edge", I mean that if we were looking to place a horizontal straight, we would check every wall to see if the tile to it's left was a non-wall. The same goes for vertical (it would check the bottom of each wall).
+	Then, from the set of suitable edges, we select one at random, and build a straight off of it, and go back to the beginning until we are done.
+
+	While this gets the job done, it is very slow. Even after very cleverly tuning the edgeTiles function, it still took around a minute to generate straights on a 100x100 board (like I was using).
+	This certainly isn't bad (previously it took upwards of eight minutes!), but isn't great either.
+
+	So I made this (quite clever, in my humble opinion) adjustment to the algorithim. Instead of generating a new Tileset of edges each time we needed one, I kept two tilesets - one for vertical, one for horizontal - and continually added to them.
+	How did I know what to add? Well, since every wall on the board was either placed by the straight-placer itself, or the outside walls, I reasoned that each time I created a straight, I also created an edge.
+	Now, for example, consider the rightward-facing case. If I place a straight in the rightward direction, each wall will have a wall to it's left and to it's right. (except for the endpoints) Thus, we know it doesn't generate any edges in the rightward direction. However, the bottom of each tile is unaccounted for.
+	Thus, I would add each newly placed wall to the edges that were valid in the vertical direction.
+
+	Critical Assumptions, Limitations, and Algorithim Errors:
+	+ A very important assumption that limits the functionality of this algorithim is that the board must be assumed to only have outer-walls. Otherwise, we can't accept that every wall is an outerwall at the start
+		+ Easily fix this by using edgeTiles, but introduces some lag.
+	+ There is the problem of assuming that there isn't going to be any tiles below the ones placed (in the horizontal case)
+	*/
 
 	bool horizontal = true;
-	Tileset horizontalEdges = edgeTiles(&myBoard, true);
-	Tileset verticalEdges = edgeTiles(&myBoard, false);
+	Tileset horizontalEdges = edgeTiles(theBoard, true);
+	Tileset verticalEdges = edgeTiles(theBoard, false);
 	Tileset* currentEdges;
 	Tileset* nonCurrentEdges;
 	Tileset* newStraight;
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < number; i++)
 	{
 		if (horizontal)
 		{
@@ -187,13 +210,21 @@ int main()
 			nonCurrentEdges = &verticalEdges;
 		}
 
-		
-
 		Tile* myTile = getRandomTile(currentEdges);
-		newStraight = straightGenerator(&myBoard, myTile, horizontal);
+		newStraight = straightGenerator(theBoard, myTile, horizontal);
 		newStraight->setAllWall();
 		nonCurrentEdges->add(newStraight);
 	}
+}
+
+int main()
+{
+
+	Board myBoard(100, 100);
+	myBoard.addOuterWalls();
+	//printBoard(&myBoard);
+
+	addStraights(&myBoard, 50);
 	printBoard(&myBoard);
 
 	int stop;
