@@ -15,6 +15,10 @@ class Tileset
 {
 private:
 	std::list <Tile*> * allTiles;
+	int max_x;
+	int max_y;
+	int min_x;
+	int min_y;
 
 public:
 	//CONSTRUCTOR
@@ -65,6 +69,24 @@ public:
 	* @return the list of tiles in list format
 	**/
 	std::list<Tile*>* getTileList() const; 
+	/**
+	* @return the smallest X
+	**/
+	int getMinX();
+	/**
+	* @return the smallest Y
+	**/
+	int getMinY();
+	/**
+	* @return the biggest X
+	**/
+	int getMaxX();
+	/**
+	* @return the biggest Y
+	**/
+	int getMaxY();
+	
+
 
 	//SETTERS
 	/**

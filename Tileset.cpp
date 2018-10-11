@@ -6,6 +6,10 @@ using namespace std;
 
 Tileset::Tileset()
 {
+	max_x = 0;
+	max_y = 0;
+	min_x = 32767;
+	min_y = 32767;
 	allTiles = new list<Tile*>;
 }
 
@@ -114,7 +118,7 @@ Tileset* Tileset::getAllY(int y)
 
 Tile* Tileset::getXY(int x, int y) throw (std::out_of_range)
 {
-
+	
 	//Create iterator
 	list<Tile*>::iterator it = allTiles->begin();
 
@@ -154,6 +158,25 @@ int Tileset::getLength()
 	return allTiles->size();
 }
 
+int Tileset::getMinX()
+{
+	return min_x;
+}
+
+int Tileset::getMinY()
+{
+	return min_y;
+}
+
+int Tileset::getMaxX()
+{
+	return max_x;
+}
+
+int Tileset::getMaxY()
+{
+	return max_y;
+}
 list<Tile*>* Tileset::getTileList() const
 {
 	return allTiles;
@@ -218,15 +241,46 @@ bool Tileset::isInTileset(int x, int y)
 
 void Tileset::add(Tile * newTile )
 {
+	if (newTile->getX() > max_x)
+	{
+		max_x = newTile->getX();
+	}
+	if (newTile->getY() > max_y)
+	{
+		max_y = newTile->getY();
+	}
+	if (newTile->getX() < min_x)
+	{
+		min_x = newTile->getX();
+	}
+	if (newTile->getY() < min_y)
+	{
+		min_y = newTile->getY();
+	}
 	if (!isInTileset(newTile))
 	{
 		allTiles->push_back(newTile);
-	}
-	
+	}	
 }
 
 void Tileset::addNoCheck(Tile* newTile)
 {
+	if (newTile->getX() > max_x)
+	{
+		max_x = newTile->getX();
+	}
+	if (newTile->getY() > max_y)
+	{
+		max_y = newTile->getY();
+	}
+	if (newTile->getX() < min_x)
+	{
+		min_x = newTile->getX();
+	}
+	if (newTile->getY() < min_y)
+	{
+		min_y = newTile->getY();
+	}
 	allTiles->push_back(newTile);
 }
 
@@ -265,11 +319,16 @@ void Tileset::remove(Tileset* toRemove)
 	list<Tile*>::iterator it = allTiles->begin();
 
 	//Do a for loop, stop when the pointer is the last one.
-	for (it; it != allTiles->end(); it++)
+	for (it; it != allTiles->end();)
 	{
+
 		if (toRemove->isInTileset(*it))
 		{
 			it = allTiles->erase(it);
+		}
+		else
+		{
+			it++;
 		}
 	}
 }
