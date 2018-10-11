@@ -1,9 +1,9 @@
 #include <iostream>
-#include "Tile.h"
-#include "Tileset.h"
-#include "Board.h"
-#include "generalTools.h"
-#include "noiseTools.h"
+#include "Classes/Tile.h"
+#include "Classes/Tileset.h"
+#include "Classes/Board.h"
+#include "Tools/generalTools.h"
+#include "Tools/noiseTools.h"
 #include <ctime>
 using namespace std;
 

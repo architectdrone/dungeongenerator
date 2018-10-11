@@ -1,8 +1,8 @@
 #ifndef NOISETOOLS_H
 #define NOISETOOLS_H
-#include "Tile.h"
-#include "Tileset.h"
-#include "Board.h"
+#include "../Classes/Tile.h"
+#include "../Classes/Tileset.h"
+#include "../Classes/Board.h"
 
 /**
 * @pre Board has outer walls.
