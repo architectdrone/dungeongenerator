@@ -87,6 +87,7 @@ Tileset edgeTiles(Board* toTest, bool goingRight)
 		}
 		
 	}
+	delete currentTileset;
 	return toReturn;
 }
 
@@ -188,13 +189,6 @@ void addStraights(Board* theBoard, int number)
 	Fixing this, I determined, without changing the way the algorithim looks, would not only be a pain in the butt, but also put a tax on resource usage. Additionally, I didn't really like neighboring straights. See "optimized dungeon" in the readme.
 	So, I made a change to the output of the straights. Now, none of them will border. To do this, I removed from the edge-trackers any tile that would start a straight next to the current one.
 
-	Critical Assumptions, Limitations, and Algorithim Errors:
-	+ A very important assumption that limits the functionality of this algorithim is that the board must be assumed to only have outer-walls. Otherwise, we can't accept that every wall is an outerwall at the start
-		+ Easily fix this by using edgeTiles, but introduces some lag.
-	+ There is the problem of assuming that there isn't going to be any tiles below the ones placed (in the horizontal case)
-
-	TODO:
-	+ Fix memory leaks.
 	*/
 
 	bool horizontal = true;
@@ -203,11 +197,18 @@ void addStraights(Board* theBoard, int number)
 	Tileset* currentEdges = nullptr;
 	Tileset* nonCurrentEdges = nullptr;
 	Tileset* newStraight;
-	Tileset* toRemoveFromCurrentEdges = nullptr;;
-	Tileset* toRemoveFromNonCurrentEdges = nullptr;;
+	Tileset* toRemoveFromCurrentEdges = nullptr;
+	Tileset* toRemoveFromNonCurrentEdges = nullptr;
 	//X and Y position of starting tile
 	int x;
 	int y;
+
+	//This is to alleviate algorithim error regarding walls right next to each other. Long story short, the straight placer thinks that it can place walls in corners unless I do this. (For various reasons)
+	horizontalEdges.remove(horizontalEdges.getXY(0, 1)); //Rightward, upper left corner
+	horizontalEdges.remove(horizontalEdges.getXY(0, theBoard->getYSize() - 2)); //Rightward, bottom left corner
+	verticalEdges.remove(verticalEdges.getXY(1, 0)); //Downward, upper left corner
+	verticalEdges.remove(verticalEdges.getXY(theBoard->getYSize()-2, 0)); //Downward, upper right corner
+	
 	for (int i = 0; i < number; i++)
 	{
 		//Toggle horizontal and vertical
@@ -223,15 +224,29 @@ void addStraights(Board* theBoard, int number)
 			currentEdges = &horizontalEdges;
 			nonCurrentEdges = &verticalEdges;
 		}
+
+		//Are we done yet?
+		if (((currentEdges->getLength() == 0)) && ((nonCurrentEdges->getLength() == 0)))
+		{
+			break;
+		}
+		else if (currentEdges->getLength() == 0)
+		{
+			continue;
+		}
+
+		
 		//Get a random tile from the Tileset.
 		Tile* myTile = getRandomTile(currentEdges);
+		cout << "\t myTile (" << myTile->getX() << "," << myTile->getY() << ")" << endl;
+		cout << "\t Generating a straight... ";
+
 		//Create a new straight starting from the tile that we chose.
 		newStraight = straightGenerator(theBoard, myTile, horizontal);
 		//Make them all walls.
 		newStraight->setAllWall();
 		//See algorithim notes. 
 		nonCurrentEdges->add(newStraight);
-
 		//Remove the capability to have straights next to each other (in theory)
 		x = myTile->getX();
 		y = myTile->getY();
@@ -314,6 +329,10 @@ void addStraights(Board* theBoard, int number)
 		}
 		currentEdges->remove(toRemoveFromCurrentEdges);
 		nonCurrentEdges->remove(toRemoveFromNonCurrentEdges);
+		
+		delete toRemoveFromCurrentEdges;
+		delete toRemoveFromNonCurrentEdges;
+		delete newStraight;		
 	}
 
 	
@@ -322,13 +341,15 @@ void addStraights(Board* theBoard, int number)
 int main()
 {
 
-	Board myBoard(100, 100);
+	Board myBoard(10, 10);
 	myBoard.addOuterWalls();
 	//printBoard(&myBoard);
-
-	addStraights(&myBoard, 50);
+	
+	
+	addStraights(&myBoard, 10);
 	printBoard(&myBoard);
 
 	int stop;
 	cin >> stop;
+
 }
