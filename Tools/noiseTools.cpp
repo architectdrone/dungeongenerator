@@ -10,38 +10,83 @@ Tileset* straightGenerator(Board* theBoard, Tile* startTile, bool goingRight)
 	* @param theBoard: The board containing all of the tiles.
 	* @return A tileset containing a new straight
 	**/
-	int x = startTile->getX();
-	int y = startTile->getY();
+
+
+	int x = 0;
+	int y = 0;
+	bool started = false;
+	Tileset* axis = nullptr;
 	Tileset* toReturn = new Tileset;
+
+	if (goingRight)
+	{
+		x = 0;
+		y = startTile->getY();
+		axis = theBoard->getAllTiles()->getAllY(y);
+		
+	}
+	else
+	{
+		x = startTile->getX();
+		y = 0;
+		axis = theBoard->getAllTiles()->getAllX(x);
+	}
+
+	if ((x == startTile->getX()) && (y == startTile->getY()))
+	{
+		started = true;
+	}
+
+	list<Tile*>::iterator it = axis->getTileList()->begin();
+	it++;
 
 	while (true)
 	{
+
+		if (goingRight)
+		{
+			x++;
+		}
+		else
+		{
+			y++;
+		}
+
 		if ((x >= theBoard->getXSize()) || (y >= theBoard->getYSize()))
 		{
 			break;
 		}
 
-		Tile* myTile;
-		if (goingRight)
+		//Start
+		if ((x == startTile->getX()) && (y == startTile->getY()))
 		{
-			myTile = theBoard->getAllTiles()->getXY(x + 1, y);
-			x++;
+			started = true;
 		}
-		else
-		{
-			myTile = theBoard->getAllTiles()->getXY(x, y + 1);
-			y++;
-		}
-		if (!(myTile->getWall()))
-		{
-			toReturn->add(myTile);
 
-		}
-		else
+		if (!started)
 		{
-			break;
+			it++;
+			continue;
 		}
-	}	return toReturn;
+		
+		Tile* myTile = *it;
+
+
+		//Stop
+		if ((myTile->getWall()))
+		{
+			if  (!((x == startTile->getX()) && (y == startTile->getY())))
+			{
+				break;
+			}
+		}
+			
+
+		toReturn->add(myTile);
+		it++;
+	}
+	delete axis;
+	return toReturn;
 }
 void addStraights(Board* theBoard, int number)
 {
@@ -214,6 +259,7 @@ void addStraights(Board* theBoard, int number)
 		delete toRemoveFromCurrentEdges;
 		delete toRemoveFromNonCurrentEdges;
 		delete newStraight;
+
 	}
 
 
